@@ -30,16 +30,16 @@ navigator.mediaDevices.getUserMedia({
     }, 1000)
   })
 
-  let text = $("input");
+  let text = document.querySelector("input");
   // when press enter send message
-  $('html').keydown(function (e) {
-    if (e.which == 13 && text.val().length !== 0) {
-      socket.emit('message', text.val());
-      text.val('')
+  document.querySelector('html').addEventListener('keydown' ,function (e) {
+    if (e.key === 'Enter' && text.value.length !== 0) {
+      socket.emit('message', text.value);
+      text.innerText=''
     }
   });
   socket.on("createMessage", message => {
-    $("ul").append(`<li class="message"><b>user</b><br/>${message}</li>`);
+    document.querySelector("ul").append(`<li class="message"><b>user</b><br/>${message}</li>`);
     scrollToBottom()
   })
 })
@@ -76,8 +76,8 @@ function addVideoStream(video, stream) {
 
 
 const scrollToBottom = () => {
-  var d = $('.main__chat_window');
-  d.scrollTop(d.prop("scrollHeight"));
+  var d = document.querySelector('.main__chat_window');
+  d.scrollTop=d.scrollHeight;
 }
 
 
